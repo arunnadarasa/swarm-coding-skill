@@ -1,33 +1,36 @@
 ---
 name: swarm-coding-skill
+version: 1.0.0
 description: Autonomous multi-agent code generation. Planner creates manifest, specialized roles execute tasks. Generates complete projects with tests, Docker, CI, and decision logs.
-requiredEnv:
-  - OPENROUTER_API_KEY
-optionalEnv:
-  - OPENROUTER_MODEL
-  - MOCK
-warnings:
-  - Writes to parent workspace (swarm-projects/, .learnings/). Run in isolated workspace.
-  - Stores prompts and agent reasoning in DECISIONS.md and .learnings/. Do not include sensitive data.
-  - Auto-includes Privy/web3 auth when prompts mention blockchain. Review generated code.
-autonomy: orchestrator-driven-code-generation
-outputPaths:
-  - swarm-projects/{timestamp}/
-  - .learnings/
-  - DECISIONS.md
-  - SWARM_SUMMARY.md
-externalServices:
-  - name: OpenRouter
-    purpose: LLM inference for planning and code generation
-    scope: API key sent with requests
-capabilities:
-  - code-generation
-  - multi-agent-orchestration
-  - project-scaffolding
-  - docker-ci
-  - testing
-  - knowledge-grounded-decisions
-  - continuous-improvement
+homepage: https://github.com/arunnadarasa/swarm-coding-skill
+metadata:
+  capabilities:
+    - code-generation
+    - multi-agent-orchestration
+    - project-scaffolding
+    - docker-ci
+    - testing
+    - knowledge-grounded-decisions
+    - continuous-improvement
+  requiredEnv:
+    - OPENROUTER_API_KEY
+  optionalEnv:
+    - OPENROUTER_MODEL
+    - MOCK
+  warnings:
+    - Writes to parent workspace (swarm-projects/, .learnings/). Run in isolated workspace.
+    - Stores prompts and agent reasoning in DECISIONS.md and .learnings/. Do not include sensitive data.
+    - Auto-includes Privy/web3 auth when prompts mention blockchain. Review generated code.
+  autonomy: orchestrator-driven-code-generation
+  outputPaths:
+    - swarm-projects/{timestamp}/
+    - .learnings/
+    - DECISIONS.md
+    - SWARM_SUMMARY.md
+  externalServices:
+    - name: OpenRouter
+      purpose: LLM inference for planning and code generation
+      scope: API key sent with requests
 ---
 
 # Swarm Coding Skill

@@ -1,6 +1,6 @@
 {
   "name": "swarm-coding-skill",
-  "description": "Autonomous multi-agent code generation. A Planner creates a manifest, then specialized roles (BackendDev, FrontendDev, QA, DevOps) execute tasks in dependency order. Generates complete projects with tests, Docker, CI, and full audit trail. Includes project memory (DECISIONS.md) and learning logs (.learnings/) for continuous improvement.",
+  "description": "Autonomous multi-agent code generation. A Planner creates a manifest, then specialized roles execute tasks in dependency order. Generates complete projects with tests, Docker, CI, and full audit trail. Includes project memory (DECISIONS.md) and learning logs (.learnings/) for continuous improvement.",
   "capabilities": [
     "code-generation",
     "multi-agent-orchestration",
