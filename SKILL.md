@@ -1,3 +1,35 @@
+---
+name: swarm-coding-skill
+description: Autonomous multi-agent code generation. Planner creates manifest, specialized roles execute tasks. Generates complete projects with tests, Docker, CI, and decision logs.
+requiredEnv:
+  - OPENROUTER_API_KEY
+optionalEnv:
+  - OPENROUTER_MODEL
+  - MOCK
+warnings:
+  - Writes to parent workspace (swarm-projects/, .learnings/). Run in isolated workspace.
+  - Stores prompts and agent reasoning in DECISIONS.md and .learnings/. Do not include sensitive data.
+  - Auto-includes Privy/web3 auth when prompts mention blockchain. Review generated code.
+autonomy: orchestrator-driven-code-generation
+outputPaths:
+  - swarm-projects/{timestamp}/
+  - .learnings/
+  - DECISIONS.md
+  - SWARM_SUMMARY.md
+externalServices:
+  - name: OpenRouter
+    purpose: LLM inference for planning and code generation
+    scope: API key sent with requests
+capabilities:
+  - code-generation
+  - multi-agent-orchestration
+  - project-scaffolding
+  - docker-ci
+  - testing
+  - knowledge-grounded-decisions
+  - continuous-improvement
+---
+
 # Swarm Coding Skill
 
 Fully autonomous multi-agent software development. Given a plain-English prompt, the swarm designs, implements, tests, and delivers a complete project end-to-end.
@@ -30,12 +62,12 @@ The skill will:
 ## Requirements
 
 - Node.js v18+
-- OpenRouter API key with access to `qwen/qwen3-coder`
-- Workspace with `.env` containing:
-  - **Required:** `OPENROUTER_API_KEY`
-  - Optional: `OPENROUTER_MODEL` (defaults to `qwen/qwen3-coder`), `MOCK=1` for dry-run
+- **Environment variables** (in `.env` at workspace root):
+  - **Required:** `OPENROUTER_API_KEY` — OpenRouter API key with `qwen/qwen3-coder` access
+  - Optional: `OPENROUTER_MODEL` (default: `qwen/qwen3-coder`), `MOCK=1` for dry-run
+- Internet access for OpenRouter API (and optionally GitHub/Docker if deployment requested)
 
-**Note:** The orchestrator reads `.env` from the workspace root (parent of this skill's directory) and writes project files to `swarm-projects/` and logs to `.learnings/` in that same workspace root. Run in an isolated workspace to avoid accidental exposure of unrelated secrets.
+**Important:** The orchestrator reads `.env` from the workspace root (parent directory of this skill) and writes project files to `swarm-projects/` and logs to `.learnings/` in that same workspace root. Run in an isolated workspace to avoid exposing unrelated secrets.
 
 ## Configuration
 
