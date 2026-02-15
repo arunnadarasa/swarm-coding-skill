@@ -1,6 +1,10 @@
 # Swarm Coding Skill
 
-Fully autonomous multi-agent software development. Give a plain-English prompt describing an app, and the swarm designs, implements, tests, and delivers a complete project end-to-end.
+Fully autonomous multi-agent software development. Given a plain-English prompt, the swarm designs, implements, tests, and delivers a complete project end-to-end.
+
+**Core capability:** Code generation via OpenRouter's qwen3-coder model. The orchestrator drives a Planner to create a manifest, then executes specialized worker roles (BackendDev, FrontendDev, QA, DevOps, etc.) in dependency order. All code is written to files; no interactive sessions.
+
+**Important:** This skill **generates code** for review and deployment by the user. It does not make business decisions or operate autonomously in production. The user remains responsible for security, compliance, and operational decisions.
 
 ## How It Works
 
@@ -25,19 +29,29 @@ The skill will:
 
 ## Requirements
 
-- OpenRouter API key with access to `qwen3-coder` (or `qwen-coder` alias)
-- Node.js workspace with sufficient disk space
-- Internet access for GitHub/Docker (optional, if deployment requested)
+- Node.js v18+
+- OpenRouter API key with access to `qwen/qwen3-coder`
+- Workspace with `.env` containing:
+  - **Required:** `OPENROUTER_API_KEY`
+  - Optional: `OPENROUTER_MODEL` (defaults to `qwen/qwen3-coder`), `MOCK=1` for dry-run
+
+**Note:** The orchestrator reads `.env` from the workspace root (parent of this skill's directory) and writes project files to `swarm-projects/` and logs to `.learnings/` in that same workspace root. Run in an isolated workspace to avoid accidental exposure of unrelated secrets.
 
 ## Configuration
 
-Store your OpenRouter key in `.env`:
+Store your OpenRouter key in `.env` at the workspace root:
 
 ```
 OPENROUTER_API_KEY=sk-or-...
 ```
 
-The skill exclusively uses `openrouter/qwen/qwen3-coder` for all agents.
+Optional overrides:
+```
+OPENROUTER_MODEL=qwen/qwen3-coder
+MOCK=1  # dry-run, no API calls
+```
+
+The skill uses `qwen/qwen3-coder` by default. Ensure your OpenRouter key has that model enabled.
 
 ## Output
 
