@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "clawkey": {
+      "version": "1.0.2",
+      "installedAt": 1771097077940
+    },
+    "self-improving-agent": {
+      "version": "1.0.5",
+      "installedAt": 1771118422484
+    }
+  }
+}
